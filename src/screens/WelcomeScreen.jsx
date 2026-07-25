@@ -7,7 +7,7 @@ export function WelcomeScreen() {
   const navigator = useNavigation();
 
   const handleLetsGo = () => {
-    navigator.replace("HomeTabs");
+    navigator.replace("AddWallets");
   };
 
   return (
@@ -22,7 +22,7 @@ export function WelcomeScreen() {
           Manage all your wallets in one place. Let's start by setting up your first one.
         </Text>
         <PrimaryButton
-          label="Set up your first Wallet"
+          label="Create my first wallet"
           onPress={handleLetsGo}
         />
       </View>
@@ -31,7 +31,7 @@ export function WelcomeScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",

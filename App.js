@@ -12,7 +12,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import OnboardingScreen from './src/screens/OnboardingScreen';
 import WelcomeScreen from "./src/screens/WelcomeScreen";
 import HomeSreen from "./src/screens/HomeScreen";
-
+import AddWalletScreen from './src/screens/AddWalletScreen';
 import AddEntryScreen from "./src/screens/AddEntryScreen";
 import { useEffect, useState } from "react";
 import { loadDummyExpenses } from "./src/database/expenses";
@@ -110,8 +110,11 @@ const RootStack = () => {
   const {isNewUser} = useAuth();  
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}
-    initialRouteName={isNewUser? "Welcome" : "HomeTabs"}>
+    // initialRouteName={isNewUser? "Welcome" : "HomeTabs"}
+    initialRouteName="Welcome"
+    >
       <Stack.Screen name="Welcome" component={WelcomeScreen}/>
+      <Stack.Screen name="AddWallets" component={AddWalletScreen}/>
       <Stack.Screen name="HomeTabs" component={HomeTabs} />
     </Stack.Navigator>
   );
@@ -147,7 +150,8 @@ const AppContent = () => {
   return (
     <ExpenseProvider>
       <NavigationContainer>
-        {isLoggedIn ? <RootStack /> : <AuthStack />}
+        {/* {isLoggedIn ? <RootStack /> : <AuthStack />} */}
+        <RootStack/>
       </NavigationContainer>
     </ExpenseProvider>
   );
