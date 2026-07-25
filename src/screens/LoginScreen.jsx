@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  Text,
-} from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import KeyboardAwareLayout from "../components/KeyboardAwareLayout";
 import InputField from "../components/InputField";
 import ErrorBanner from "../components/ErrorBanner";
@@ -13,12 +9,12 @@ import useAuth from "../hooks/useAuth";
 import { loginRequest } from "../api/auth";
 import { getCredentialError } from "../utils/validation";
 
-export function LoginScreen() {
+export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, setIsNewUser } = useAuth();
   const navigator = useNavigation();
 
   const handleLogin = async () => {
@@ -34,6 +30,7 @@ export function LoginScreen() {
       const { ok, data } = await loginRequest(email.trim(), password);
       if (ok) {
         setIsLoggedIn(true);
+        setIsNewUser(false);
       } else {
         setError(data?.message ?? "Login failed. Please try again.");
       }
@@ -46,46 +43,50 @@ export function LoginScreen() {
 
   return (
     <KeyboardAwareLayout>
-      <Image
-        source={require("../../assets/logo.png")}
-        style={styles.imgLogo}
-      />
-      <Text style={styles.tvLogin}>
-        Log in to use <Text style={styles.tvPockit}>Pockit</Text>
-      </Text>
-      <InputField
-        value={email}
-        setValue={setEmail}
-        placeholder={"Enter your email"}
-        icon={"mail-outline"}
-      />
-      <InputField
-        value={password}
-        setValue={setPassword}
-        placeholder={"Enter your password"}
-        icon={"lock-closed-outline"}
-        secureTextEntry
-      />
-      <ErrorBanner message={error} />
-      <PrimaryButton
-        label="Log In"
-        loading={loading}
-        onPress={handleLogin}
-      />
-      <Text style={styles.tvFooter}>
-        Don't have an account?{" "}
-        <Text
-          style={styles.tvFooterLink}
-          onPress={() => navigator.replace("Register")}
-        >
-          Register
+      <View style={styles.container}>
+        <Image
+          source={require("../../assets/logo.png")}
+          style={styles.imgLogo}
+        />
+        <Text style={styles.tvLogin}>
+          Log in to use <Text style={styles.tvPockit}>Pockit</Text>
         </Text>
-      </Text>
+        <InputField
+          value={email}
+          setValue={setEmail}
+          placeholder={"Enter your email"}
+          icon={"mail-outline"}
+        />
+        <InputField
+          value={password}
+          setValue={setPassword}
+          placeholder={"Enter your password"}
+          icon={"lock-closed-outline"}
+          secureTextEntry
+        />
+        <ErrorBanner message={error} />
+        <PrimaryButton label="Log In" loading={loading} onPress={handleLogin} />
+        <Text style={styles.tvFooter}>
+          Don't have an account?{" "}
+          <Text
+            style={styles.tvFooterLink}
+            onPress={() => navigator.replace("Register")}
+          >
+            Register
+          </Text>
+        </Text>
+      </View>
     </KeyboardAwareLayout>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fdf7f0",
+  },
   imgLogo: {
     height: 180,
     width: 180,

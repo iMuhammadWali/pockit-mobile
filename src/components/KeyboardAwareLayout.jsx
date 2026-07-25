@@ -18,7 +18,7 @@ export default function KeyboardAwareLayout({
         contentContainerStyle={[styles.vContentContainer, contentContainerStyle]}
         enableOnAndroid
         enableAutomaticScroll
-        extraScrollHeight={120}
+        extraScrollHeight={50}
         keyboardOpeningTime={0}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
@@ -30,6 +30,12 @@ export default function KeyboardAwareLayout({
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fdf7f0",
+  },
   vSafeArea: {
     flex: 1,
     backgroundColor: "#fdf7f0",
@@ -39,9 +45,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fdf7f0",
   },
   vContentContainer: {
+    flexGrow: 1,
     backgroundColor: "#fdf7f0",
     paddingHorizontal: 20,
-    paddingTop: 80,
+    // paddingTop: 80,
     alignItems: "center",
   },
 });

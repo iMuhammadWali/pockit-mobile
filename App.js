@@ -8,10 +8,11 @@ import useAppFonts from "./src/hooks/useAppFonts";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import { LoginScreen } from "./src/screens/LoginScreen";
-
-import OnboardingScreen from "./src/screens/OnboardingScreen";
+import LoginScreen from "./src/screens/LoginScreen";
+import OnboardingScreen from './src/screens/OnboardingScreen';
+import WelcomeScreen from "./src/screens/WelcomeScreen";
 import HomeSreen from "./src/screens/HomeScreen";
+
 import AddEntryScreen from "./src/screens/AddEntryScreen";
 import { useEffect, useState } from "react";
 import { loadDummyExpenses } from "./src/database/expenses";
@@ -19,7 +20,7 @@ import AIScreen from "./src/screens/AIScreen";
 import HistoryScreen from "./src/screens/HistoryScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
 import { ExpenseProvider } from "./src/context/ExpenseContext";
-import { RegisterScreen } from "./src/screens/RegisterScreen";
+import RegisterScreen from "./src/screens/RegisterScreen";
 import { AuthProvider } from "./src/context/AuthContext";
 import useAuth from "./src/hooks/useAuth";
 
@@ -98,6 +99,7 @@ const HomeTabs = () => {
 const AuthStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
     </Stack.Navigator>
@@ -105,24 +107,27 @@ const AuthStack = () => {
 };
 
 const RootStack = () => {
+  const {isNewUser} = useAuth();  
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}
+    initialRouteName={isNewUser? "Welcome" : "HomeTabs"}>
+      <Stack.Screen name="Welcome" component={WelcomeScreen}/>
+      <Stack.Screen name="HomeTabs" component={HomeTabs} />
+    </Stack.Navigator>
+  );
+};
+
+const AppRoutes = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="HomeTabs" component={HomeTabs} />
+      <Stack.Screen name="AuthStack" component={AuthStack} />
+      <Stack.Screen name="RootStack" component={RootStack} />
     </Stack.Navigator>
   );
 };
 const AppContent = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { isLoggedIn } = useAuth();
-
-  useEffect(() => {
-    const load = async () => {
-      setIsLoading(true);
-      await loadDummyExpenses();
-      setIsLoading(false);
-    };
-    load();
-  }, []);
 
   const fontsLoaded = useAppFonts();
   if (!fontsLoaded || isLoading) {
