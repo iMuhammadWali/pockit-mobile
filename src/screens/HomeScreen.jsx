@@ -1,6 +1,10 @@
+// TODO: Rename this as dashboard.
+
 import { useContext, useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
+
 // TODO: After completing the design, Ask AI to put all the styling in the styles object.
 
 import { Ionicons } from "@expo/vector-icons";
@@ -40,6 +44,8 @@ const HomeSreen = () => {
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
+    <StatusBar style="dark" />
+
       {/* Spent and remaining card */}
       <View
         style={{ width: "100%", height: 76, flexDirection: "row", gap: 10 }}

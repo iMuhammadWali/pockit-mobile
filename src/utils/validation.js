@@ -1,4 +1,4 @@
-export const MIN_PASSWORD_LENGTH = 8;
+export const MIN_PASSWORD_LENGTH = 6;
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -10,6 +10,7 @@ export function isPasswordValid(password) {
   return password.length >= MIN_PASSWORD_LENGTH;
 }
 
+// I thought of something else as well which I have forgot..
 export function getCredentialError(email, password, username = null) {
   // Collect every empty required field into one message.
   const missing = [];
@@ -30,7 +31,7 @@ export function getCredentialError(email, password, username = null) {
   return null;
 }
 
-// Example of what this function does: ["a", "b", "c"] -> "a, b and c"
+// Example of what this function does: Converts ["a", "b", "c"] to "a, b and c"
 function formatList(items) {
   if (items.length === 1) return items[0];
   return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
