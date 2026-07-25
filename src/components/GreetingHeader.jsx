@@ -1,6 +1,3 @@
-// Custom playful header for the dashboard greeting.
-// Uses Ionicons (not emoji) for the little decorative flourish.
-
 import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
