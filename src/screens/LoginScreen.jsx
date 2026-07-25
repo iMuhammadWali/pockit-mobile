@@ -87,8 +87,8 @@ export function LoginScreen() {
 
 const styles = StyleSheet.create({
   imgLogo: {
-    height: 200,
-    width: 200,
+    height: 180,
+    width: 180,
   },
   tvLogin: {
     marginVertical: 15,

@@ -1,5 +1,6 @@
 const REQUEST_TIMEOUT_MS = 10000;
 
+// This post request should be in a file called client.js in the api folder.
 async function postRequest(path, body) {
   const apiEndpoint = `${process.env.EXPO_PUBLIC_BASE_URL}${path}`;
   const controller = new AbortController();
