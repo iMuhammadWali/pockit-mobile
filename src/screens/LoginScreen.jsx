@@ -14,7 +14,7 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { setIsLoggedIn, setIsNewUser } = useAuth();
+  const { login } = useAuth();
   const navigator = useNavigation();
 
   const handleLogin = async () => {
@@ -27,15 +27,10 @@ export default function LoginScreen() {
     setLoading(true);
     setError("");
     try {
-      const { ok, data } = await loginRequest(email.trim(), password);
-      if (ok) {
-        setIsLoggedIn(true);
-        setIsNewUser(false);
-      } else {
-        setError(data?.message ?? "Login failed. Please try again.");
-      }
+      const data = await loginRequest(email.trim(), password);
+      login(data.accessToken, data.refreshToken);
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError(err.message);
     } finally {
       setLoading(false);
     }

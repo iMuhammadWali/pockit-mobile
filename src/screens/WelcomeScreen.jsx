@@ -7,14 +7,14 @@ export function WelcomeScreen() {
   const navigator = useNavigation();
 
   const handleLetsGo = () => {
-    navigator.replace("AddWallets");
+    navigator.navigate("AddWallets");
   };
 
   return (
     <KeyboardAwareLayout>
       <View style={styles.container}>
         <Image
-          source={require("../../assets/pockit-welcome-wali.png")}
+          source={require("../../assets/pockit-welcome.png")}
           style={styles.imgWelcome}
         />
         <Text style={styles.tvTitle}>Welcome to <Text style={styles.tvPockit}>Pockit!</Text></Text>

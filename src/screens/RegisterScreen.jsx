@@ -15,7 +15,7 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const { setIsLoggedIn, setIsNewUser } = useAuth();
+  const { login } = useAuth();
 
   const navigator = useNavigation();
 
@@ -28,16 +28,10 @@ export default function RegisterScreen() {
     setIsLoading(true);
     setError("");
     try {
-      const { ok, data } = await registerAndLogin(username, email, password);
-      if (ok) {
-        setIsLoggedIn(true);
-        setIsNewUser(true);
-      } else {
-        setError(data?.message ?? "Register failed. Please try again.");
-      }
+      const data = await registerAndLogin(username, email, password);
+      login(data.accessToken, data.refreshToken, true);
     } catch (err) {
-      // Still need to see what kind of errors may occur here.
-      setError("Something went wrong. Please try again.");
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }

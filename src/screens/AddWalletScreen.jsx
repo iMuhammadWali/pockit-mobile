@@ -14,19 +14,10 @@ export function AddWalletScreen() {
   const navigator = useNavigation();
 
   const handleSave = () => {
-    if (!walletName.trim()) {
-      return;
-    }
-    setLoading(true);
-    // Save wallet logic here
-    setTimeout(() => {
-      setLoading(false);
-      if (isNewUser) {
-        navigator.replace("HomeTabs");
-      } else {
-        navigator.replace("WalletSetupStep3");
-      }
-    }, 1000);
+    // if (!walletName.trim()) {
+    //   return;
+    // }
+    navigator.navigate("HomeTabs")    
   };
 
   return (
@@ -38,7 +29,7 @@ export function AddWalletScreen() {
       >
         <View style={styles.container}>
           <Image
-            source={require("../../assets/pockit-welcome-wali.png")}
+            source={require("../../assets/pockit-wallet.png")}
             style={styles.imgWallet}
           />
           <Text style={styles.tvTitle}>Set up your wallet</Text>
@@ -83,9 +74,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   imgWallet: {
-    height: 220,
-    width: 220,
-    marginBottom: 20,
+    height: 200,
+    width: 300,
   },
   tvTitle: {
     fontFamily: "Poppins_600SemiBold",

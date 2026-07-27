@@ -110,8 +110,7 @@ const RootStack = () => {
   const {isNewUser} = useAuth();  
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}
-    // initialRouteName={isNewUser? "Welcome" : "HomeTabs"}
-    initialRouteName="Welcome"
+    initialRouteName={isNewUser? "Welcome" : "HomeTabs"}
     >
       <Stack.Screen name="Welcome" component={WelcomeScreen}/>
       <Stack.Screen name="AddWallets" component={AddWalletScreen}/>
@@ -129,8 +128,7 @@ const AppRoutes = () => {
   );
 };
 const AppContent = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
 
   const fontsLoaded = useAppFonts();
   if (!fontsLoaded || isLoading) {
@@ -150,8 +148,7 @@ const AppContent = () => {
   return (
     <ExpenseProvider>
       <NavigationContainer>
-        {/* {isLoggedIn ? <RootStack /> : <AuthStack />} */}
-        <RootStack/>
+        {isLoggedIn ? <RootStack /> : <AuthStack />}
       </NavigationContainer>
     </ExpenseProvider>
   );

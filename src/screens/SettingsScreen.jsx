@@ -7,7 +7,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import useAuth from "../hooks/useAuth";
 
 const SettingsScreen = () => {
-  const { setIsLoggedIn } = useAuth();
+  const { logout } = useAuth();
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
 
   // I can add icons here as well but I wont do it myself. I will let GPT do it.
@@ -43,7 +43,7 @@ const SettingsScreen = () => {
         onCancel={() => setIsLogoutDialogOpen(false)}
         onConfirm={() => {
           setIsLogoutDialogOpen(false);
-          setIsLoggedIn(false);
+          logout();
         }}
       />
     </SafeAreaView>
