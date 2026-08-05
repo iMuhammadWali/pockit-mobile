@@ -1,20 +1,20 @@
+// react-native imports
 import { StyleSheet, Text, View, Image } from "react-native";
+
+// components
 import KeyboardAwareLayout from "../components/KeyboardAwareLayout";
 import PrimaryButton from "../components/PrimaryButton";
-import { useNavigation } from "@react-navigation/native";
 
-export function WelcomeScreen() {
-  const navigator = useNavigation();
+export function WelcomeScreen({onNext}) {
 
-  const handleLetsGo = () => {
-    navigator.navigate("AddWallets");
+  const handleCreateMyFirstWallet = () => {
+    onNext && onNext();
   };
 
   return (
-    <KeyboardAwareLayout>
       <View style={styles.container}>
         <Image
-          source={require("../../assets/pockit-welcome.png")}
+          source={require("../../assets/img-welcome.png")}
           style={styles.imgWelcome}
         />
         <Text style={styles.tvTitle}>Welcome to <Text style={styles.tvPockit}>Pockit!</Text></Text>
@@ -23,15 +23,15 @@ export function WelcomeScreen() {
         </Text>
         <PrimaryButton
           label="Create my first wallet"
-          onPress={handleLetsGo}
+          onPress={handleCreateMyFirstWallet}
         />
       </View>
-    </KeyboardAwareLayout>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    // borderWidth: 1,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
