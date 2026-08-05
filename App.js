@@ -13,6 +13,7 @@ import OnboardingScreen from './src/screens/OnboardingScreen';
 import WelcomeScreen from "./src/screens/WelcomeScreen";
 import HomeSreen from "./src/screens/HomeScreen";
 import AddWalletScreen from './src/screens/AddWalletScreen';
+import WalletSuccessScreen from "./src/screens/WalletSuccessScreen";
 import AddEntryScreen from "./src/screens/AddEntryScreen";
 import { useEffect, useState } from "react";
 import { loadDummyExpenses } from "./src/database/expenses";
@@ -23,6 +24,7 @@ import { ExpenseProvider } from "./src/context/ExpenseContext";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import { AuthProvider } from "./src/context/AuthContext";
 import useAuth from "./src/hooks/useAuth";
+import WalletSetupFlowScreen from "./src/screens/WalletSetupFlowScreen";
 
 // For now I will code the navigation in the app.js and will export it later to a different file or maybe create a different folder for it later.
 const Stack = createNativeStackNavigator();
@@ -110,23 +112,14 @@ const RootStack = () => {
   const {isNewUser} = useAuth();  
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}
-    initialRouteName={isNewUser? "Welcome" : "HomeTabs"}
+    initialRouteName={isNewUser? "WalletSetupFlow" : "HomeTabs"}
     >
-      <Stack.Screen name="Welcome" component={WelcomeScreen}/>
-      <Stack.Screen name="AddWallets" component={AddWalletScreen}/>
+      <Stack.Screen name="WalletSetupFlow" component={WalletSetupFlowScreen}/>
       <Stack.Screen name="HomeTabs" component={HomeTabs} />
     </Stack.Navigator>
   );
 };
 
-const AppRoutes = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="AuthStack" component={AuthStack} />
-      <Stack.Screen name="RootStack" component={RootStack} />
-    </Stack.Navigator>
-  );
-};
 const AppContent = () => {
   const { isLoggedIn, isLoading } = useAuth();
 
@@ -149,6 +142,7 @@ const AppContent = () => {
     <ExpenseProvider>
       <NavigationContainer>
         {isLoggedIn ? <RootStack /> : <AuthStack />}
+        <OnboardingStack />
       </NavigationContainer>
     </ExpenseProvider>
   );

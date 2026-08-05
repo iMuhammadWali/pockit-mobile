@@ -1,13 +1,11 @@
-let accessToken = "";
 const REQUEST_TIMEOUT_MS = 10000;
 
-export async function sendRequest(path, method, options, accessToken) {
+export async function sendRequest(path, method, options, accessToken = null) {
   const headers = {};
   if (options.body) {
     headers["Content-Type"] = "application/json";
   }
-
-  if (accessToken) {
+  if (accessToken !== null) {
     headers["Authorization"] = `Bearer ${accessToken}`;
   }
 
@@ -42,7 +40,7 @@ export async function sendRequest(path, method, options, accessToken) {
     if (err.name === "AbortError") {
       throw new Error("Request timed out. Is the server running?");
     }
-    // console.error("Server error: ", err);
+
     throw err;
   } finally {
     clearTimeout(timeout);
@@ -50,4 +48,4 @@ export async function sendRequest(path, method, options, accessToken) {
 }
 
 // Since auth does not need a rotate request, I will write this later and test the send Request for now.
-export function apiRequest() {}
+export async function apiRequest(path, method, options) {}
