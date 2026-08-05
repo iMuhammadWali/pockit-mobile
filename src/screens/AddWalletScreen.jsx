@@ -3,79 +3,81 @@ import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
 import KeyboardAwareLayout from "../components/KeyboardAwareLayout";
 import InputField from "../components/InputField";
 import PrimaryButton from "../components/PrimaryButton";
+import PaginationDots from "../components/PaginationDots";
 import { useNavigation } from "@react-navigation/native";
-import useAuth from "../hooks/useAuth";
+import ErrorBanner from "../components/ErrorBanner";
+import { createWallet } from "../api/wallet";
 
-export function AddWalletScreen() {
+export function AddWalletScreen({ onNext }) {
   const [walletName, setWalletName] = useState("");
   const [initialBalance, setInitialBalance] = useState("");
-  const [loading, setLoading] = useState(false);
-  const { isNewUser } = useAuth();
-  const navigator = useNavigation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSave = () => {
-    // if (!walletName.trim()) {
-    //   return;
-    // }
-    navigator.navigate("HomeTabs")    
+  const handleSave = async () => {
+    if (isLoading) return;
+
+    setIsLoading(true);
+    setError("");
+    try {
+      // console.log(initialBalance.trim());
+      // const result = await createWallet(walletName.trim(), initialBalance.trim());
+      // setWalletName("");
+      // setInitialBalance("");
+      onNext && onNext();
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <KeyboardAwareLayout>
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        bounces={false}
-      >
-        <View style={styles.container}>
-          <Image
-            source={require("../../assets/pockit-wallet.png")}
-            style={styles.imgWallet}
-          />
-          <Text style={styles.tvTitle}>Set up your wallet</Text>
-          <Text style={styles.tvSubtitle}>
-            Give your main stash a name and its starting balance.
-          </Text>
-          <InputField
-            value={walletName}
-            setValue={setWalletName}
-            placeholder={"e.g., Main Savings"}
-            icon={"wallet-outline"}
-          />
-          <InputField
-            value={initialBalance}
-            setValue={setInitialBalance}
-            placeholder={"0.00"}
-            prefixText="$ "
-            keyboardType="decimal-pad"
-          />
-          <PrimaryButton
-            label="Save & Continue"
-            loading={loading}
-            onPress={handleSave}
-          />
-        </View>
-      </ScrollView>
-    </KeyboardAwareLayout>
+    <View style={styles.container}>
+      <Image
+        source={require("../../assets/img-wallet-setup.png")}
+        style={styles.imgWallet}
+      />
+      <Text style={styles.tvTitle}>Set up your wallet</Text>
+      <Text style={styles.tvSubtitle}>
+        Give your wallet a name and its starting balance.
+      </Text>
+      <InputField
+        value={walletName}
+        setValue={setWalletName}
+        placeholder={"Enter a name (i.e. Pockit-Money)"}
+        icon={"wallet-outline"}
+      />
+      <InputField
+        value={initialBalance}
+        setValue={setInitialBalance}
+        placeholder={"Enter initial amount in Rupees (i.e. 1000)"}
+        keyboardType="decimal-pad"
+        icon={"cash-outline"}
+      />
+      <ErrorBanner message={error} />
+
+      <PrimaryButton
+        label="Save and Continue"
+        loading={isLoading}
+        onPress={handleSave}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollContent: {
-    flexGrow: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingBottom: 30,
-    backgroundColor: "#fdf7f0",
-  },
   container: {
+    // borderWidth: 1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
+    backgroundColor: "#fdf7f0",
   },
   imgWallet: {
     height: 200,
     width: 300,
+        // borderWidth: 1
   },
   tvTitle: {
     fontFamily: "Poppins_600SemiBold",
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     color: "#555555",
-    marginBottom: 40,
+    marginBottom: 15,
   },
 });
 
