@@ -8,8 +8,7 @@ const OnboardingScreen = () => {
   const navigator = useNavigation();
 
   const handleButtonPress = () => {
-    ToastAndroid.show("Button Pressed", ToastAndroid.SHORT);
-    navigator.navigate("HomeTabs");
+    navigator.navigate("Login");
   };
 
   return (

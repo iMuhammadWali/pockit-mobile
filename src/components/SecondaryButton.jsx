@@ -1,11 +1,12 @@
 import { ActivityIndicator, Pressable, Text, StyleSheet } from "react-native";
 
-const PrimaryButton = ({ label, onPress, loading = false }) => {
+const SecondaryButton = ({ label, onPress, loading = false, style }) => {
   return (
     <Pressable
       style={({ pressed }) => [
         styles.button,
         pressed && !loading && styles.pressedButton,
+        style,
       ]}
       onPress={onPress}
       disabled={loading}
@@ -21,8 +22,7 @@ const PrimaryButton = ({ label, onPress, loading = false }) => {
 
 const styles = StyleSheet.create({
   button: {
-    marginVertical: 30,
-    backgroundColor: "#ff9999",
+    backgroundColor: "#e6e3ea",
     width: 300,
     height: 50,
     justifyContent: "center",
@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   pressedButton: {
-    backgroundColor: "#ff7e7e",
+    backgroundColor: "#d8d5dc",
   },
   buttonText: {
-    color: "#5a1a1a",
+    color: "#000000",
     fontFamily: "Poppins_600SemiBold",
-    fontSize: 16
+    fontSize: 16,
   },
 });
 
-export default PrimaryButton;
+export default SecondaryButton;
