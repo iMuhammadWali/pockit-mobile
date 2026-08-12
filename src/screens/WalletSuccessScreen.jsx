@@ -21,9 +21,8 @@ export function AddWalletSuccessScreen() {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../assets/img-wallet-success.png")}
+        source={require("../../assets/img-wallet-success_3.png")}
         style={styles.imgSuccess}
-        // resizeMode="contain"
       />
 
       <Text style={styles.tvTitle}>You're All Set!</Text>

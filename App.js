@@ -26,6 +26,8 @@ import { AuthProvider } from "./src/context/AuthContext";
 import useAuth from "./src/hooks/useAuth";
 import WalletSetupFlowScreen from "./src/screens/WalletSetupFlowScreen";
 
+
+import WalletsScreen from "./src/screens/WalletsScreen";
 // For now I will code the navigation in the app.js and will export it later to a different file or maybe create a different folder for it later.
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -56,15 +58,12 @@ const HomeTabs = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="History"
-        component={HistoryScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="time-outline" size={size} color={color} />
-          ),
-        }}
-      />
+      <Tab.Screen name="Wallets" component={WalletsScreen} 
+      options={{
+        tabBarIcon: ({color, size}) => (
+          <Ionicons name="wallet-outline" size={size} color={color}/>
+        )
+      }}/>
       <Tab.Screen
         name="AddEntry"
         component={AddEntryScreen}
@@ -77,14 +76,15 @@ const HomeTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Analytics"
-        component={AIScreen}
+        name="History"
+        component={HistoryScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="bar-chart-outline" size={size} color={color} />
+            <Ionicons name="time-outline" size={size} color={color} />
           ),
         }}
       />
+
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}
@@ -142,7 +142,6 @@ const AppContent = () => {
     <ExpenseProvider>
       <NavigationContainer>
         {isLoggedIn ? <RootStack /> : <AuthStack />}
-        <OnboardingStack />
       </NavigationContainer>
     </ExpenseProvider>
   );

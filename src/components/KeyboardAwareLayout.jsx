@@ -30,15 +30,9 @@ export default function KeyboardAwareLayout({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fdf7f0",
-  },
   vSafeArea: {
     flex: 1,
-    backgroundColor: "#fdf7f0",
+    backgroundColor: "#fff",
   },
   vScroll: {
     flex: 1,
@@ -48,7 +42,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: "#fdf7f0",
     paddingHorizontal: 20,
-    // paddingTop: 80,
-    alignItems: "center",
+    alignItems: "stretch"
   },
 });

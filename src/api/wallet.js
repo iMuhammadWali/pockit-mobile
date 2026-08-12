@@ -10,3 +10,8 @@ export async function createWallet(walletName, initialBalance) {
     },
   }, accessToken);
 }
+
+export async function getAllWallets() {
+  const accessToken = getAccessToken();
+  return await sendRequest("wallets", "GET", {}, accessToken);
+}

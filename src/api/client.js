@@ -25,6 +25,7 @@ export async function sendRequest(path, method, options, accessToken = null) {
   }
 
   const apiEndpoint = `${process.env.EXPO_PUBLIC_BASE_URL}${path}`;
+  console.log(apiEndpoint);
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
