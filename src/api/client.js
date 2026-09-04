@@ -25,15 +25,15 @@ export async function sendRequest(path, method, options, accessToken = null) {
   }
 
   const apiEndpoint = `${process.env.EXPO_PUBLIC_BASE_URL}${path}`;
-  console.log(apiEndpoint);
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-
+  console.log(apiEndpoint, accessToken);
   try {
     const response = await fetch(apiEndpoint, requestConfig);
     const data = await response.json();
     // Need to handle server error codes here man.
     if (!response.ok) {
+
       throw new Error(data.message);
     }
     return data;

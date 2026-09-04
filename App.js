@@ -1,33 +1,33 @@
-import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
+// React Native UI primitives
+import { ActivityIndicator, View } from "react-native";
 
+// Navigation
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import useAppFonts from "./src/hooks/useAppFonts";
-
+// Icons
 import { Ionicons } from "@expo/vector-icons";
 
-import LoginScreen from "./src/screens/LoginScreen";
-import OnboardingScreen from './src/screens/OnboardingScreen';
-import WelcomeScreen from "./src/screens/WelcomeScreen";
-import HomeSreen from "./src/screens/HomeScreen";
-import AddWalletScreen from './src/screens/AddWalletScreen';
-import WalletSuccessScreen from "./src/screens/WalletSuccessScreen";
-import AddEntryScreen from "./src/screens/AddEntryScreen";
-import { useEffect, useState } from "react";
-import { loadDummyExpenses } from "./src/database/expenses";
-import AIScreen from "./src/screens/AIScreen";
-import HistoryScreen from "./src/screens/HistoryScreen";
-import SettingsScreen from "./src/screens/SettingsScreen";
+// App state and hooks
+import useAppFonts from "./src/hooks/useAppFonts";
 import { ExpenseProvider } from "./src/context/ExpenseContext";
-import RegisterScreen from "./src/screens/RegisterScreen";
 import { AuthProvider } from "./src/context/AuthContext";
 import useAuth from "./src/hooks/useAuth";
+
+// Screens
+import AddEntryScreen from "./src/screens/AddEntryScreen";
+import HistoryScreen from "./src/screens/HistoryScreen";
+import HomeSreen from "./src/screens/HomeScreen";
+import LoginScreen from "./src/screens/LoginScreen";
+import OnboardingScreen from './src/screens/OnboardingScreen';
+import RegisterScreen from "./src/screens/RegisterScreen";
+import SettingsScreen from "./src/screens/SettingsScreen";
 import WalletSetupFlowScreen from "./src/screens/WalletSetupFlowScreen";
-
-
 import WalletsScreen from "./src/screens/WalletsScreen";
+
+// Custom navigation components
+import LiquidGlassTabBar from "./src/components/LiquidGlassTabBar";
 // For now I will code the navigation in the app.js and will export it later to a different file or maybe create a different folder for it later.
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -35,33 +35,25 @@ const Tab = createBottomTabNavigator();
 const HomeTabs = () => {
   return (
     <Tab.Navigator
+      // `tabBar={(props) => <LiquidGlassTabBar {...props} />}
       screenOptions={{
-        tabBarActiveTintColor: "#f8a4a4",
-        tabBarInactiveTintColor: "#8e8e8e",
         headerShown: false,
-        tabBarStyle: {
-          paddingTop: 5,
-          elevation: 10,
-          backgroundColor: "#fffbf7",
-          borderTopWidth: 1,
-          borderTopColor: "#EDE5DA",
-        },
+        tabBarHideOnKeyboard: true,
       }}
     >
-      {/* Have to see how to add a back button here. */}
       <Tab.Screen
         name="Home"
         component={HomeSreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? "home" : "home-outline"} size={size} color={color} />
           ),
         }}
       />
       <Tab.Screen name="Wallets" component={WalletsScreen} 
       options={{
-        tabBarIcon: ({color, size}) => (
-          <Ionicons name="wallet-outline" size={size} color={color}/>
+        tabBarIcon: ({focused, color, size}) => (
+          <Ionicons name={focused ? "wallet" : "wallet-outline"} size={size} color={color}/>
         )
       }}/>
       <Tab.Screen
@@ -70,8 +62,8 @@ const HomeTabs = () => {
         options={{
           title: "Add New Entry",
           tabBarLabel: "Add Entry",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="add-outline" size={size} color={color} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? "add-circle" : "add-circle-outline"} size={size} color={color} />
           ),
         }}
       />
@@ -79,8 +71,8 @@ const HomeTabs = () => {
         name="History"
         component={HistoryScreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="time-outline" size={size} color={color} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? "time" : "time-outline"} size={size} color={color} />
           ),
         }}
       />
@@ -89,8 +81,8 @@ const HomeTabs = () => {
         name="Settings"
         component={SettingsScreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings-outline" size={size} color={color} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? "settings" : "settings-outline"} size={size} color={color} />
           ),
         }}
       />

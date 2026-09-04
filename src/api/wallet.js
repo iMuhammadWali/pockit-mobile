@@ -13,5 +13,6 @@ export async function createWallet(walletName, initialBalance) {
 
 export async function getAllWallets() {
   const accessToken = getAccessToken();
+  console.log(accessToken);
   return await sendRequest("wallets", "GET", {}, accessToken);
 }

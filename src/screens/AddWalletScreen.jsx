@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
-import KeyboardAwareLayout from "../components/KeyboardAwareLayout";
+import { Image, StyleSheet, Text, View } from "react-native";
 import InputField from "../components/InputField";
 import PrimaryButton from "../components/PrimaryButton";
-import PaginationDots from "../components/PaginationDots";
-import { useNavigation } from "@react-navigation/native";
 import ErrorBanner from "../components/ErrorBanner";
 import { createWallet } from "../api/wallet";
 
@@ -16,14 +13,10 @@ export function AddWalletScreen({ onNext }) {
 
   const handleSave = async () => {
     if (isLoading) return;
-
     setIsLoading(true);
     setError("");
     try {
-      // console.log(initialBalance.trim());
-      // const result = await createWallet(walletName.trim(), initialBalance.trim());
-      // setWalletName("");
-      // setInitialBalance("");
+      createWallet(walletName, initialBalance);
       onNext && onNext();
     } catch (e) {
       setError(e.message);
@@ -68,7 +61,6 @@ export function AddWalletScreen({ onNext }) {
 
 const styles = StyleSheet.create({
   container: {
-    // borderWidth: 1,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -77,7 +69,6 @@ const styles = StyleSheet.create({
   imgWallet: {
     height: 200,
     width: 300,
-        // borderWidth: 1
   },
   tvTitle: {
     fontFamily: "Poppins_600SemiBold",

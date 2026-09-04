@@ -1,12 +1,19 @@
+// React
 import { useEffect, useState } from "react";
+
+// React Native
+import { ActivityIndicator, StyleSheet, View, TextInput } from "react-native";
+
+// API
 import { getAllWallets } from "../api/wallet";
-import WalletCard from "../components/WalletScreen/WalletCard";
-import { ActivityIndicator, Text, View, StyleSheet } from "react-native";
+
+// Layout
+import KeyboardAwareLayout from "../components/KeyboardAwareLayout";
+
+// Components
 import ErrorBanner from "../components/ErrorBanner";
 import Header from "../components/Header";
-import GreetingHeader from "../components/GreetingHeader";
-
-import KeyboardAwareLayout from "../components/KeyboardAwareLayout";
+import WalletCard from "../components/WalletScreen/WalletCard";
 
 const WalletsScreen = () => {
   // This needs to fetch all the wallets and show them.
@@ -57,7 +64,9 @@ const WalletsScreen = () => {
   return (
     <KeyboardAwareLayout header={  <Header pageName="Wallets" />}>
       <View style={styles.container}>
-      
+        {/* Need to add a search bar */}
+        <TextInput style={{width: "100%", height: 50, color: "#fff"}}
+        />
         {renderWallets()}
 
         <ErrorBanner message={error} />
