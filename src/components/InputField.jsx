@@ -1,18 +1,16 @@
 import { useState } from "react";
-import {
-  Image,
-  KeyboardAvoidingView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  Platform,
-  Pressable,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function InputField({value, setValue, placeholder, icon, secureTextEntry, multiline}) {
+export default function InputField({
+  value,
+  setValue,
+  placeholder,
+  icon,
+  secureTextEntry,
+  multiline,
+  keyboardType,
+}) {
   const [isSecure, setIsSecure] = useState(secureTextEntry);
 
   return (
@@ -34,6 +32,7 @@ export default function InputField({value, setValue, placeholder, icon, secureTe
         onChangeText={setValue}
         secureTextEntry={isSecure}
         multiline={multiline}
+        keyboardType={keyboardType}
       />
       {secureTextEntry && (
         <Pressable onPress={()=> setIsSecure(!isSecure)} hitSlop={8}>
