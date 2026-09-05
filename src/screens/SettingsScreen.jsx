@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import SingleSettingsItem from "../components/SingleSettingsItem";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import useAuth from "../hooks/useAuth";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const ProfileSection = () => {
   return (

@@ -1,11 +1,11 @@
-import AddWalletScreen from "./AddWalletScreen";
+import FirstWalletSetupScreen from "./FirstWalletSetupScreen";
 import WelcomeScreen from "./WelcomeScreen";
 import WalletSuccessScreen from "./WalletSuccessScreen";
 import { useState } from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import PaginationDots from "../components/PaginationDots";
 import KeyboardAwareLayout from "../components/KeyboardAwareLayout";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
 const WalletSetupFlowScreen = () => {
@@ -44,8 +44,12 @@ const WalletSetupFlowScreen = () => {
 
       <View style={styles.contentContainer}>
         {currentStep === 0 && <WelcomeScreen onNext={handleNextStep} />}
-        {currentStep === 1 && <AddWalletScreen onNext={handleNextStep} />}
-        {currentStep === 2 && <WalletSuccessScreen onNext={handleNextStep} />}
+        {currentStep === 1 && (
+          <FirstWalletSetupScreen onNext={handleNextStep} />
+        )}
+        {currentStep === 2 && (
+          <WalletSuccessScreen onAddAnother={() => setCurrentStep(1)} />
+        )}
       </View>
     </KeyboardAwareLayout>
   );

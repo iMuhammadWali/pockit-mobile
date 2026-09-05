@@ -14,7 +14,7 @@ import { KeyboardAvoidingView } from "react-native";
 
 // Third party stuff.
 import * as Clipboard from "expo-clipboard";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import Markdown from "react-native-markdown-display";
 import Header from "../components/Header";
 

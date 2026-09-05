@@ -49,4 +49,8 @@ export async function sendRequest(path, method, options, accessToken = null) {
 }
 
 // Since auth does not need a rotate request, I will write this later and test the send Request for now.
-export async function apiRequest(path, method, options) {}
+export async function apiRequest(path, method, options) {
+  // Need to write this now so when an access token is expired, I send the rotate request and then call sendRequest again.
+  
+
+}

@@ -2,7 +2,7 @@
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 
 // Icons
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function SearchBar({
   value = "",

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 // Inline error banner. Renders nothing when message is empty/falsy.
 export default function ErrorBanner({ message }) {

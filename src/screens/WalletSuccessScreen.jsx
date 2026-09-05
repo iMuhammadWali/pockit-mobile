@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View, Image } from "react-native";
-import KeyboardAwareLayout from "../components/KeyboardAwareLayout";
+// React Native
+import { Image, StyleSheet, Text, View } from "react-native";
+
+// Navigation
+import { useNavigation } from "@react-navigation/native";
+
+// Components
 import PrimaryButton from "../components/PrimaryButton";
 import SecondaryButton from "../components/SecondaryButton";
-import { useNavigation } from "@react-navigation/native";
-import PaginationDots from "../components/PaginationDots";
 
-export function AddWalletSuccessScreen() {
+export function AddWalletSuccessScreen({ onAddAnother }) {
   const navigator = useNavigation();
 
   const handleGoToDashboard = () => {
@@ -14,8 +17,7 @@ export function AddWalletSuccessScreen() {
   };
 
   const handleAddAnother = () => {
-    // Navigate back to AddWallet to create another one
-    navigator.navigate("AddWallet");
+    onAddAnother && onAddAnother();
   };
 
   return (

@@ -1,11 +1,18 @@
+// React
 import { useState } from "react";
+
+// React Native
 import { Image, StyleSheet, Text, View } from "react-native";
-import InputField from "../components/InputField";
-import PrimaryButton from "../components/PrimaryButton";
-import ErrorBanner from "../components/ErrorBanner";
+
+// API
 import { createWallet } from "../api/wallet";
 
-export function AddWalletScreen({ onNext }) {
+// Components
+import ErrorBanner from "../components/ErrorBanner";
+import InputField from "../components/InputField";
+import PrimaryButton from "../components/PrimaryButton";
+
+export function FirstWalletSetupScreen({ onNext }) {
   const [walletName, setWalletName] = useState("");
   const [initialBalance, setInitialBalance] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +23,9 @@ export function AddWalletScreen({ onNext }) {
     setIsLoading(true);
     setError("");
     try {
-      createWallet(walletName, initialBalance);
+      await createWallet(walletName.trim(), initialBalance.trim());
+      setWalletName("");
+      setInitialBalance("");
       onNext && onNext();
     } catch (e) {
       setError(e.message);
@@ -85,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddWalletScreen;
+export default FirstWalletSetupScreen;
